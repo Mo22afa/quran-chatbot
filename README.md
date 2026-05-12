@@ -1,12 +1,13 @@
 <div align="center">
 
-# 🕌 Quran Ayah Correction Chatbot
-### AI-Powered Arabic NLP System for Quranic Verse Detection & Correction
+# 🕌 Quran Ayah Correction & Retrieval System
+### AI-Powered Arabic NLP Engine for Quranic Verse Search, Correction, and Audio Retrieval
 
-<img src="https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python">
-<img src="https://img.shields.io/badge/NLP-Arabic-green?style=for-the-badge">
-<img src="https://img.shields.io/badge/AI-Quran%20Correction-gold?style=for-the-badge">
-<img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge">
+<img src="https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python">
+<img src="https://img.shields.io/badge/Arabic-NLP-success?style=for-the-badge">
+<img src="https://img.shields.io/badge/Streamlit-App-red?style=for-the-badge">
+<img src="https://img.shields.io/badge/HuggingFace-Embeddings-yellow?style=for-the-badge">
+<img src="https://img.shields.io/badge/RapidFuzz-FuzzyMatching-orange?style=for-the-badge">
 
 </div>
 
@@ -14,48 +15,168 @@
 
 # 📖 Overview
 
-The **Quran Ayah Correction Chatbot** is an intelligent Arabic NLP project designed to detect incorrectly written Quranic verses and retrieve the closest authentic Ayah using advanced text preprocessing and similarity matching techniques.
+This project is an intelligent **Arabic NLP retrieval system** designed to help users find the correct Quranic ayah from:
 
-This system demonstrates how Artificial Intelligence and Natural Language Processing can be applied to Arabic text understanding and Quranic information retrieval.
+- Incomplete verses
+- Unvowelled Arabic text
+- Slight spelling mistakes
+- Partial phrases
+- First words of an ayah
+
+The system does **NOT generate Quranic text**.
+
+Instead, it retrieves authentic ayahs directly from a verified Quran dataset using a hybrid retrieval pipeline combining:
+
+- Semantic Search
+- Fuzzy Matching
+- Prefix Matching
+- Ordered Word Matching
+
+The application also supports:
+
+✅ Audio recitation playback  
+✅ Similarity scoring  
+✅ Alternative ayah suggestions  
+✅ Fast Quranic search  
 
 ---
 
-# ✨ Key Features
+# ✨ Features
 
-🚀 Intelligent Quran verse correction  
-🧠 Arabic NLP preprocessing pipeline  
-🔍 Similarity-based Ayah matching  
-📊 Accuracy evaluation metrics  
-⚡ Fast text retrieval system  
-🕌 Handles Arabic normalization and cleaning  
-📈 Scalable architecture for future AI models  
+## 🔍 Intelligent Quran Retrieval
+Searches across all **6236 Quranic ayahs** using semantic similarity and fuzzy matching.
 
----
+## 🧠 Arabic NLP Preprocessing
+Normalizes Arabic text by:
+- Removing diacritics
+- Normalizing Alef forms
+- Removing tatweel
+- Handling hamza variations
+- Cleaning extra spaces and symbols
 
-# 🧠 AI Pipeline
+## ⚡ Typo-Tolerant Matching
+Handles spelling mistakes and partial inputs.
 
-```mermaid
-graph LR
-A[User Input] --> B[Arabic Preprocessing]
-B --> C[Text Normalization]
-C --> D[Similarity Matching]
-D --> E[Best Matching Ayah]
-E --> F[Correction Result]
+### Example
+
+#### User Input
+
+```text
+الحمد لله رب العلمين
+```
+
+#### Retrieved Ayah
+
+```text
+ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
+```
+
+#### Output
+
+```text
+Surah: الفاتحة
+Ayah: 2
+Similarity Score: 97%
 ```
 
 ---
 
-# 🛠️ Technologies Used
+# 🔊 Audio Recitation
 
-| Technology | Role |
+The system automatically generates audio playback for retrieved ayahs using Quran audio CDN integration.
+
+### Audio Source
+
+```text
+https://cdn.islamic.network/quran/audio/128/ar.alafasy/{ayah_no_quran}.mp3
+```
+
+---
+
+# 🧠 Retrieval Pipeline
+
+```mermaid
+graph TD
+
+A[User Input] --> B[Arabic Normalization]
+B --> C[Semantic Embeddings]
+C --> D[Fuzzy Matching]
+D --> E[Prefix & Ordered Word Search]
+E --> F[Retrieve Best Ayah]
+F --> G[Display Similarity Score]
+G --> H[Generate Audio Playback]
+```
+
+---
+
+# 🛠 Technologies Used
+
+| Technology | Purpose |
 |---|---|
 | Python | Core Development |
+| Streamlit | Web Interface |
+| Sentence Transformers | Semantic Search |
+| Hugging Face | Embedding Models |
+| RapidFuzz | Fuzzy Matching |
 | Pandas | Data Processing |
 | NumPy | Numerical Operations |
-| Regex | Arabic Text Cleaning |
-| Jupyter Notebook | Experimentation |
-| NLP Techniques | Similarity Matching |
-| SequenceMatcher | Verse Comparison |
+| Matplotlib | Evaluation Visualization |
+
+---
+
+# 🤖 Model
+
+### Default Embedding Model
+
+```text
+sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+```
+
+The final retrieval system combines:
+
+- Hugging Face Embeddings
+- RapidFuzz Matching
+- Exact Matching
+- Prefix Search
+- Ordered Word Matching
+
+This hybrid architecture significantly improves retrieval quality for Arabic Quranic text.
+
+---
+
+# 📊 Evaluation Results
+
+The system was evaluated on **150 generated test cases** covering:
+
+- Full ayahs without diacritics
+- First phrase retrieval
+- Middle phrase retrieval
+- Typo correction
+
+---
+
+## 📈 Overall Performance
+
+| Metric | Score |
+|---|---|
+| Top-1 Accuracy | 91.33% |
+| Recall@5 | 94.67% |
+| MRR | 92.63% |
+| Mean Rank | 1.07 |
+| nDCG@5 | 93.14% |
+
+---
+
+## 📌 Results by Query Type
+
+| Query Type | Accuracy |
+|---|---|
+| First Phrase | 100% |
+| Full Ayah | 97.96% |
+| Middle Phrase | 100% |
+| Typo Phrase | 72.73% |
+
+The typo category is the most challenging because queries intentionally contain spelling mistakes.
 
 ---
 
@@ -64,18 +185,21 @@ E --> F[Correction Result]
 ```bash
 quran-chatbot/
 │
-├── data/                           # Quran datasets
-├── evaluation/                     # Evaluation outputs
-├── scripts/                        # Utility scripts
+├── app.py
+├── matcher.py
+├── preprocessing.py
+├── requirements.txt
+├── README.md
 │
-├── app.py                          # Main application
-├── matcher.py                      # Matching engine
-├── preprocessing.py                # Arabic preprocessing
+├── data/
+│   └── quran.csv
 │
-├── requirements.txt                # Dependencies
-├── README.md                       # Documentation
+├── evaluation/
+│   ├── expanded_test_cases.csv
+│   ├── expanded_evaluation_summary.csv
+│   └── expanded_evaluation_by_type.csv
 │
-└── Quran_Ayah_Correction_Chatbot.ipynb
+└── scripts/
 ```
 
 ---
@@ -97,73 +221,77 @@ pip install -r requirements.txt
 
 ---
 
-# ▶️ Run The Project
+# ▶️ Run The Application
 
 ```bash
-python app.py
+streamlit run app.py
 ```
 
-Or launch Jupyter Notebook:
-
-```bash
-jupyter notebook
-```
-
----
-
-# 🧪 Example
-
-## Input
+Open:
 
 ```text
-مالك يوم الدين
+http://localhost:8501
 ```
 
-## AI Output
+---
+
+# 🧪 Usage Examples
+
+## Example 1
+
+### Input
 
 ```text
-Correct Ayah:
-مَالِكِ يَوْمِ الدِّينِ
+ان اعطيماك الكوثر
+```
 
-Similarity Score: 98%
+### Output
+
+```text
+إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ
+
+Surah: الكوثر
+Ayah: 1
 ```
 
 ---
 
-# 📊 Evaluation & Results
+## Example 2
 
-The system was evaluated using Quranic verse similarity metrics and achieved highly accurate matching performance.
+### Input
 
-### Evaluation Includes:
+```text
+ربي انهن اظللن كثيرا من الناس
+```
 
-✅ Similarity Accuracy  
-✅ Retrieval Precision  
-✅ Matching Performance  
-✅ Correction Quality  
+### Output
 
----
+```text
+رَبِّ إِنَّهُنَّ أَضْلَلْنَ كَثِيرًا مِّنَ ٱلنَّاسِ
 
-# 🔥 Future Improvements
-
-- 🤖 Deep Learning Integration
-- 🧠 Transformer-based Arabic Models
-- 🎤 Voice Input Support
-- 🌐 Streamlit Web Deployment
-- 📱 Interactive Chat Interface
-- ☁️ API Deployment
+Surah: ابراهيم
+Ayah: 36
+```
 
 ---
 
-# 🌟 Why This Project Matters
+# 🔒 Safety Note
 
-Arabic NLP is one of the most challenging areas in Natural Language Processing due to:
+This project does not use generative AI to create or modify Quranic verses.
 
-- Complex morphology
-- Diacritics handling
-- Text normalization challenges
-- Semantic similarity understanding
+All returned ayahs are retrieved directly from a verified Quran dataset.
 
-This project demonstrates practical solutions for handling Arabic Quranic text using AI techniques.
+---
+
+# 🚀 Future Improvements
+
+- 🎤 Speech-to-Text Input
+- 📱 Mobile-Friendly Interface
+- ⚡ Faster Vector Search
+- 🤖 Transformer Fine-Tuning
+- 🌐 REST API Deployment
+- 🔍 Word-Level Error Highlighting
+- 📥 Offline Audio Support
 
 ---
 
@@ -171,23 +299,20 @@ This project demonstrates practical solutions for handling Arabic Quranic text u
 
 ## Mostafa Abdelwahab
 
-AI & Data Science Enthusiast  
-Passionate about:
-- Artificial Intelligence
+AI & Data Science Enthusiast focused on:
+
 - Arabic NLP
-- Machine Learning
 - Information Retrieval
-
----
-
-# 🔗 Repository
-
-👉 https://github.com/Mo22afa/quran-chatbot
+- Machine Learning
+- Intelligent Search Systems
 
 ---
 
 <div align="center">
 
-### ⭐ If you like this project, give it a star on GitHub!
+# ⭐ If you like this project, give it a star!
+
+### 🔗 Repository
+https://github.com/Mo22afa/quran-chatbot
 
 </div>

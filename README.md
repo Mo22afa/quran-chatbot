@@ -48,6 +48,7 @@ Searches across all **6236 Quranic ayahs** using semantic similarity and fuzzy m
 
 ## 🧠 Arabic NLP Preprocessing
 Normalizes Arabic text by:
+
 - Removing diacritics
 - Normalizing Alef forms
 - Removing tatweel
@@ -57,26 +58,68 @@ Normalizes Arabic text by:
 ## ⚡ Typo-Tolerant Matching
 Handles spelling mistakes and partial inputs.
 
-### Example
+---
 
-#### User Input
+# 🧪 Usage Examples
+
+## Example 1
+
+### Input
 
 ```text
 الحمد لله رب العلمين
 ```
 
-#### Retrieved Ayah
+### Retrieved Ayah
 
 ```text
 ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ
 ```
 
-#### Output
+### Output
 
 ```text
 Surah: الفاتحة
 Ayah: 2
 Similarity Score: 97%
+```
+
+---
+
+## Example 2
+
+### Input
+
+```text
+ان اعطيماك الكوثر
+```
+
+### Output
+
+```text
+إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ
+
+Surah: الكوثر
+Ayah: 1
+```
+
+---
+
+## Example 3
+
+### Input
+
+```text
+ربي انهن اظللن كثيرا من الناس
+```
+
+### Output
+
+```text
+رَبِّ إِنَّهُنَّ أَضْلَلْنَ كَثِيرًا مِّنَ ٱلنَّاسِ
+
+Surah: ابراهيم
+Ayah: 36
 ```
 
 ---
@@ -235,46 +278,6 @@ http://localhost:8501
 
 ---
 
-# 🧪 Usage Examples
-
-## Example 1
-
-### Input
-
-```text
-ان اعطيماك الكوثر
-```
-
-### Output
-
-```text
-إِنَّآ أَعْطَيْنَٰكَ ٱلْكَوْثَرَ
-
-Surah: الكوثر
-Ayah: 1
-```
-
----
-
-## Example 2
-
-### Input
-
-```text
-ربي انهن اظللن كثيرا من الناس
-```
-
-### Output
-
-```text
-رَبِّ إِنَّهُنَّ أَضْلَلْنَ كَثِيرًا مِّنَ ٱلنَّاسِ
-
-Surah: ابراهيم
-Ayah: 36
-```
-
----
-
 # 🔒 Safety Note
 
 This project does not use generative AI to create or modify Quranic verses.
@@ -292,6 +295,92 @@ All returned ayahs are retrieved directly from a verified Quran dataset.
 - 🌐 REST API Deployment
 - 🔍 Word-Level Error Highlighting
 - 📥 Offline Audio Support
+
+---
+
+# 📌 Evaluation Note
+
+## Why Did the System Achieve High Accuracy?
+
+The system achieved very high performance on the current evaluation set.  
+However, this does **not** mean that the model is perfect in all possible cases.
+
+The high score is mainly due to the nature of the current test set, which contains relatively clear and limited examples.
+
+For example, if the system correctly retrieves all examples in a small test set:
+
+```text
+6 / 6 = 100%
+```
+
+This result only reflects performance on the tested examples, not on all possible Quranic retrieval scenarios.
+
+---
+
+## 🧠 Hybrid Retrieval Architecture
+
+The reported performance is not produced by the Hugging Face embedding model alone.
+
+The system uses a **hybrid retrieval pipeline** combining:
+
+```text
+Hugging Face Semantic Embeddings
++
+RapidFuzz Fuzzy Matching
++
+Exact Substring Priority
++
+Prefix & Ordered Word Matching
+```
+
+This hybrid approach significantly improves retrieval quality, especially when the user input is:
+
+- Close to the original ayah
+- Missing diacritics
+- Partially incomplete
+- Slightly misspelled
+
+---
+
+## 📖 Restricted Search Space
+
+The search space is limited to the Quran dataset only:
+
+```text
+6236 Quranic ayahs
+```
+
+Since the system retrieves from a fixed verified dataset rather than generating text, retrieval becomes much more reliable when the input resembles an existing ayah.
+
+The system does **NOT generate Quranic text**.
+
+All returned ayahs are retrieved directly from the Quran dataset.
+
+---
+
+## 📈 Correct Interpretation of the Results
+
+The correct interpretation is:
+
+> The system achieved excellent performance on the current evaluation set.  
+> This result demonstrates that the proposed hybrid retrieval approach works effectively on the tested examples, but larger and more challenging benchmark datasets are still required for stronger academic validation.
+
+---
+
+# 🚀 Recommended Future Evaluation
+
+For stronger and more reliable evaluation, future work should include:
+
+- More Quran ayahs from different surahs
+- Short ambiguous phrases
+- Severe spelling mistakes
+- Inputs with missing words
+- Similar ayahs with overlapping wording
+- Real user-generated queries
+- Larger benchmark datasets
+- At least 500+ manually verified test cases
+
+This would provide a more robust and academically reliable evaluation of the retrieval system.
 
 ---
 
